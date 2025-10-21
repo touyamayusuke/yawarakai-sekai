@@ -1,0 +1,16 @@
+<h1 class="text-xl font-bold mb-4"><%= @board.title %></h1>
+
+<div class="space-y-2 mb-6" id="posts">
+  <%= turbo_frame_tag "posts" do %>
+    <%= render @posts %>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <div class="p-4 bg-white border rounded">
+    <h2 class="font-semibold mb-2">新規投稿</h2>
+    <%= render "posts/form", board: @board, post: @post %>
+  </div>
+<% else %>
+  <p class="text-sm text-gray-600">投稿するにはログインしてください。</p>
+<% end %>

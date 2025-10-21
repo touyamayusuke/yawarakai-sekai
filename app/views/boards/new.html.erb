@@ -1,0 +1,12 @@
+<h1 class="text-xl font-bold mb-4">掲示板を作成</h1>
+
+<%= form_with model: @board, class: "space-y-3" do |f| %>
+  <div>
+    <%= f.label :title, "タイトル", class: "block text-sm" %>
+    <%= f.text_field :title, class: "w-full border rounded p-2" %>
+    <% @board.errors.full_messages_for(:title).each do |m| %>
+      <p class="text-red-600 text-sm"><%= m %></p>
+    <% end %>
+  </div>
+  <%= f.submit "保存", class: "px-4 py-2 bg-indigo-600 text-white rounded" %>
+<% end %>

@@ -1,0 +1,14 @@
+<%= turbo_frame_tag dom_id(Post.new, :form) do %>
+  <%= form_with model: [board, post], data: { controller: "count" }, class: "space-y-2" do |f| %>
+    <div>
+  <%= f.text_area :body, rows: 4, class: "w-full border rounded p-2", data: { count_target: "input", action: "input->count#input" } %>
+      <div class="text-xs text-gray-500">
+        <span data-count-target="current">0</span>/500 文字
+      </div>
+      <% post.errors.full_messages_for(:body).each do |m| %>
+        <p class="text-red-600 text-sm"><%= m %></p>
+      <% end %>
+    </div>
+    <%= f.submit "投稿する", class: "px-4 py-2 bg-indigo-600 text-white rounded" %>
+  <% end %>
+<% end %>

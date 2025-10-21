@@ -1,0 +1,9 @@
+<h1 class="text-xl font-bold mb-4">掲示板一覧</h1>
+
+<div class="space-y-2">
+  <% @boards.each do |b| %>
+    <div class="p-3 bg-white border rounded">
+      <%= link_to b.title, board_path(b), class: "text-indigo-700 underline" %>
+    </div>
+  <% end %>
+</div>

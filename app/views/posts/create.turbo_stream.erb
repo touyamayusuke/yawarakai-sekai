@@ -1,0 +1,7 @@
+<%= turbo_stream.append "posts" do %>
+  <%= render @post %>
+<% end %>
+
+<%= turbo_stream.replace dom_id(Post.new, :form) do %>
+  <%= render "posts/form", board: @board, post: Post.new %>
+<% end %>
