@@ -26,7 +26,10 @@ test:
 production:
   primary:
     <<: *default
-    url: <%= ENV["DATABASE_URL"] %>   # ← クォート無しのENV値
+    url: <%= ENV["DATABASE_URL"] %>   # ← クォート無しでRenderに設定したURL
   cable:
     <<: *default
-    url: <%= ENV["DATABASE_URL"] %>   # ← とりあえず primary と同じでOK
+    url: <%= ENV["DATABASE_URL"] %>
+  queue:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
