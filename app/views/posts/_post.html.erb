@@ -1,16 +1,25 @@
 <%= turbo_frame_tag dom_id(post) do %>
-  <div class="p-3 bg-white border rounded flex justify-between items-start mb-2">
-    <div>
-      <p class="whitespace-pre-wrap"><%= post.body %></p>
+  <div class="p-3 bg-white border rounded flex justify-between items-start mb-2" data-controller="gentle-mode">
+    <div class="w-full">
+      <div data-gentle-mode-target="body">
+        <p class="whitespace-pre-wrap" data-gentle-mode-target="original" style="display:block;"><%= post.body %></p>
+        <p class="whitespace-pre-wrap" data-gentle-mode-target="gentle" style="display:none;"><%= post.gentle_body.presence || '（優しい文がありません）' %></p>
+      </div>
       <p class="text-xs text-gray-500 mt-1">
         by <%= post.user.email %> / <%= l(post.created_at, format: :short) %>
       </p>
     </div>
     <% if current_user == post.user %>
-      <%= link_to "削除",
-          [post.board, post],
-          data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
-          class: "text-sm text-red-600 underline" %>
+      <%= link_to [post.board, post],
+            data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
+            class: "inline-flex items-center whitespace-nowrap gap-1.5 px-4 py-3 text-sm font-medium text-white rounded bg-gray-500 hover:bg-gray-700 transition" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span>削除</span>
+      <% end %>
     <% end %>
   </div>
 <% end %>
