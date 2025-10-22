@@ -2,17 +2,17 @@
 
 ## 概要
 
-このアプリは Ruby on Rails 製の掲示板です。投稿内容を ChatGPT API で「柔らかい世界」な文章に変換し、原文と優しい文を切り替えて表示できます。
+このアプリは Ruby on Rails 製の掲示板です。投稿内容を ChatGPT API で「柔らかい世界」な文章に変換し、原文と柔らかい文を切り替えて表示できます。
 
 - 通常モード: 投稿の原文を表示
-- 優しい世界モード: ChatGPT APIで変換された優しい文を表示
+- 柔らかい世界モード: ChatGPT APIで変換された柔らかい文を表示
 - 投稿一覧・詳細で切り替え可能
 
 ## 主な機能
 - ユーザー認証（Devise）
 - 投稿・削除
 - 投稿内容の柔らかい世界変換（OpenAI GPT-3.5 Turbo）
-- 原文/優しい文の切り替えUI
+- 原文/柔らかい文の切り替えUI
 
 ## セットアップ
 
@@ -43,21 +43,21 @@ export OPENAI_API_KEY="sk-..."
 bin/dev
 ```
 
-## 優しい世界モードの使い方
+## 柔らかい世界モードの使い方
 
-- 投稿フォームから投稿すると、ChatGPT APIで優しい文が自動生成されます
-- ページ上部の「原文モード」「優しい世界モード」ボタンで表示を切り替えられます
+- 投稿フォームから投稿すると、ChatGPT APIで柔らかい文が自動生成されます
+- ページ上部の「原文モード」「柔らかい世界モード」ボタンで表示を切り替えられます
 - 投稿詳細でも切り替え可能
 
 ## 注意事項
 - OpenAI APIキーは有効なものを使用してください
-- APIリクエスト失敗時は優しい文が生成されません
+- APIリクエスト失敗時は柔らかい文が生成されません
 - Turbo/StimulusによるUI切り替えを利用しています
 
 ## 開発・カスタマイズ
 - コントローラ: `app/controllers/posts_controller.rb`
 - 投稿表示: `app/views/posts/_post.html.erb`
-- 優しい世界UI: Stimulusコントローラ `app/javascript/controllers/gentle_mode_all_controller.js` など
+- 柔らかい世界UI: Stimulusコントローラ `app/javascript/controllers/gentle_mode_all_controller.js` など
 
 ## ライセンス
 MIT
