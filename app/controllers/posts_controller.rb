@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     if @post.save
       # OpenAI APIで優しい内容を生成（失敗しても投稿は成立）
       begin
-        client  = OpenAI::Client.new
+        client  = OpenAI::Client.new(api_key: ENV["OPENAI_API_KEY"])
         prompt  = "次の文章を、誰も傷つけない柔らかい表現に書き換えてください：\n\n#{@post.body}"
 
         response = client.chat(parameters: {
