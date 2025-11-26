@@ -1,38 +1,48 @@
 require "test_helper"
 
 class BoardsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @board = boards(:one)
+    @user = users(:one)
+    sign_in @user
+  end
+
   test "should get index" do
-    get boards_index_url
+    get boards_url
     assert_response :success
   end
 
   test "should get show" do
-    get boards_show_url
+    get board_url(@board)
     assert_response :success
   end
 
   test "should get new" do
-    get boards_new_url
+    get new_board_url
     assert_response :success
   end
 
-  test "should get create" do
-    get boards_create_url
-    assert_response :success
+  test "should create board" do
+    assert_difference("Board.count") do
+      post boards_url, params: { board: { title: "Test Board" } }
+    end
+    assert_redirected_to board_url(Board.last)
   end
 
   test "should get edit" do
-    get boards_edit_url
+    get edit_board_url(@board)
     assert_response :success
   end
 
-  test "should get update" do
-    get boards_update_url
-    assert_response :success
+  test "should update board" do
+    patch board_url(@board), params: { board: { title: "Updated" } }
+    assert_redirected_to board_url(@board)
   end
 
-  test "should get destroy" do
-    get boards_destroy_url
-    assert_response :success
+  test "should destroy board" do
+    assert_difference("Board.count", -1) do
+      delete board_url(@board)
+    end
+    assert_redirected_to boards_url
   end
 end

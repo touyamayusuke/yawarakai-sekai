@@ -1,13 +1,22 @@
 require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
-  test "should get create" do
-    get posts_create_url
-    assert_response :success
+  setup do
+    @board = boards(:one)
+    @post = posts(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
-  test "should get destroy" do
-    get posts_destroy_url
-    assert_response :success
+  test "should create post" do
+    assert_difference("Post.count") do
+      post board_posts_url(@board), params: { post: { body: "Test post" } }
+    end
+  end
+
+  test "should destroy post" do
+    assert_difference("Post.count", -1) do
+      delete board_post_url(@board, @post)
+    end
   end
 end
